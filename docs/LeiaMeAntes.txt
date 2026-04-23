@@ -1,0 +1,76 @@
+Página inicial
+http://localhost:8080/
+
+Acesso ao Painel Admin
+http://localhost:8080/admin/login.html
+
+Login: admin
+Senha: admin123 configurado inicialmente na classe /config/DataSeeder.java
+
+Acesso ao Banco de Dados H2
+URL do Banco http://localhost:8080/h2-console
+jdbc:h2:file:./data/teresadb;DB_CLOSE_DELAY=-1
+
+---
+
+# Build e Execução
+
+Para iniciar o projeto
+./mvnw spring-boot:run
+
+Para rodar os testes
+./mvnw test
+
+Para limpar o projeto (remover arquivos gerados)
+./mvnw clean
+
+Para compilar o projeto
+./mvnw compile
+
+Para gerar o pacote (jar/war)
+./mvnw package
+
+Para gerar o pacote pulando testes
+./mvnw package -DskipTests
+
+Para instalar o artefato no repositório local (.m2)
+./mvnw install
+
+Para rodar uma classe específica
+./mvnw spring-boot:run -Dspring-boot.run.main-class=com.exemplo.Main
+
+Para rodar com um profile específico
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+
+Para rodar testes de uma classe específica
+./mvnw test -Dtest=NomeDaClasseTeste
+
+Para rodar um método específico de teste
+./mvnw test -Dtest=NomeDaClasseTeste#nomeDoMetodo
+
+
+# Dependencias
+
+Para verificar dependências do projeto
+./mvnw dependency:tree
+
+Para baixar dependências sem compilar
+./mvnw dependency:resolve
+
+Para atualizar dependências (forçar update)
+./mvnw clean install -U
+
+Para verificar plugins e versões
+./mvnw versions:display-plugin-updates
+
+Para verificar novas versões de dependências
+./mvnw versions:display-dependency-updates
+
+Para formatar e validar o projeto
+./mvnw verify
+
+Para rodar a aplicação empacotada (jar)
+java -jar target/nome-do-arquivo.jar
+
+Para rodar a aplicação em modo debug
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
