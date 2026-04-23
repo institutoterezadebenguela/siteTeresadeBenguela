@@ -1,9 +1,12 @@
 package br.com.instituto.teresa.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import br.com.instituto.teresa.domain.Volunteer;
 import br.com.instituto.teresa.dto.VolunteerRequestDTO;
 import br.com.instituto.teresa.repository.VolunteerRepository;
-import org.springframework.stereotype.Service;
 
 @Service
 public class VolunteerService {
@@ -24,4 +27,7 @@ public class VolunteerService {
         
         volunteerRepository.save(volunteer);
     }
+    public List<Volunteer> listarTodos() {
+        return volunteerRepository.findAll();
+}
 }

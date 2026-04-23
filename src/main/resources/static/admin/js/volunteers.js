@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadVolunteerContent();
+    loadVolunteers();
 
     const form = document.getElementById('volunteer-form');
     if (form) {
@@ -51,4 +52,43 @@ async function updateVolunteerContent(e) {
         console.error('Erro:', error);
         showAlert('Erro de conexão ao salvar.', 'error');
     }
+
+}
+
+async function loadVolunteers() {
+  try {
+    const response = await fetch('/api/volunteers');
+
+    if (!response.ok) {
+      throw new Error('Erro ao buscar voluntários');
+    }
+
+    const volunteers = await response.json();
+
+    const container = document.getElementById('volunteers-list');
+    container.innerHTML = '';
+
+    if (volunteers.length === 0) {
+      container.innerHTML = '<p class="text-gray-500">Nenhum voluntário cadastrado.</p>';
+      return;
+    }
+
+    volunteers.forEach(v => {
+      const card = document.createElement('div');
+      card.className = 'p-4 bg-gray-50 rounded-lg shadow';
+
+      card.innerHTML = `
+        <p><strong>Nome:</strong> ${v.name}</p>
+        <p><strong>Email:</strong> ${v.email}</p>
+        <p><strong>Telefone:</strong> ${v.phone || 'Não informado'}</p>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error(error);
+    document.getElementById('volunteers-list').innerHTML =
+      '<p class="text-red-500">Erro ao carregar voluntários.</p>';
+  }
 }
